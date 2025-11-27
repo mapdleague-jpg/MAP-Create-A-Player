@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MAP Create-A-Player™ Engine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- MAP Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --map-blue: #2E5084;
+      --bg: #f3f4f8;
+      --card-bg: #ffffff;
+      --border: #dce2ee;
+      --text-main: #1a1a1a;
+      --text-muted: #6b7280;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 2rem;
+      background: var(--bg);
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-main);
+      text-align: center;
+    }
+
+    /* 🔵 MAP BORDER FRAME */
+    .page-frame {
+      border: 10px solid var(--map-blue);
+      border-radius: 14px;
+      background: #ffffff;
+      padding: 2.5rem 1.5rem 3rem;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .page-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--map-blue);
+      margin-bottom: 0.8rem;
+    }
+
+    .page-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 760px;
+      margin: 0 auto 1rem;
+      line-height: 1.45;
+    }
+
+    .pill-row {
+      display: flex;
+      justify-content: center;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.2rem;
+    }
+
+    .pill {
+      background: #e2e8f0;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      color: #1a1a1a;
+      font-weight: 500;
+    }
+
+    /* FILTER BAR */
+    .filter-bar {
+      background: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 1rem;
+      max-width: 900px;
+      margin: 1.5rem auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .filter-group { min-width: 160px; display: flex; flex-direction: column; gap: 0.2rem; }
+
+    .filter-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .filter-input, .filter-select {
+      padding: 0.45rem 0.6rem;
+      font-size: 0.8rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    /* TABLE CARD */
+    .table-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 1rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+      text-align: center;
+    }
+
+    th, td {
+      padding: 0.55rem;
+      border-bottom: 1px solid #edf2f7;
+      font-size: 0.8rem;
+    }
+
+    th {
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    .cell-name { color: var(--map-blue); font-weight: 600; }
+
+    .badge-stars {
+      background: #fff7ed;
+      padding: 0.2rem 0.45rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+    }
+
+    .badge-personality {
+      background: #f3e8ff;
+      color: #4b106e;
+      padding: 0.2rem 0.45rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .empty-state {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      padding: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-frame">
+
+    <h1 class="page-title">MAP Create-A-Player™ Engine</h1>
+
+    <p class="page-subtitle">
+      Built using MAP’s Create-A-Player engine, this interface reverse-engineers the makeup of this year’s 
+      three FOCUS invitees to identify the next wave of elite prospects.
+    </p>
+
+    <div class="pill-row">
+      <span class="pill">📊 Analytics</span>
+      <span class="pill">📝 Scouting Reports</span>
+      <span class="pill">🎯 Future Matches</span>
+      <span class="pill">Create-A-Player Engine</span>
+    </div>
+
+    <!-- FILTER BAR -->
+    <section class="filter-bar">
+      <div class="filter-group">
+        <label class="filter-label">Search</label>
+        <input id="searchInput" class="filter-input" type="text" placeholder="Name, school, sport..." />
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">School</label>
+        <select id="schoolFilter" class="filter-select"><option value="">All</option></select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Sport</label>
+        <select id="sportFilter" class="filter-select"><option value="">All</option></select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Personality</label>
+        <select id="personalityFilter" class="filter-select"><option value="">All</option></select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Sort By</label>
+        <select id="sortSelect" class="filter-select">
+          <option value="rank-asc">Rank (Best → Worst)</option>
+          <option value="gpa-desc">GPA (High → Low)</option>
+          <option value="stars-desc">Stars (High → Low)</option>
+          <option value="name-asc">Name (A → Z)</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- PLAYER TABLE -->
+    <section class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>School</th>
+            <th>Sport</th>
+            <th>Year</th>
+            <th>Rank</th>
+            <th>GPA</th>
+            <th>Stars</th>
+            <th>Personality</th>
+          </tr>
+        </thead>
+
+        <tbody id="prospectTableBody"></tbody>
+      </table>
+
+      <div id="emptyState" class="empty-state" style="display:none;">
+        No prospects match your filters yet.
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    const prospects = [
+      { name: "Kiley Wilhelm", stars: 5, fallRank: 5, school: "Harvard University", sport: "Swimming & Diving", gradYear: 2028, gpa: 3.95, personality: "Podium Sweep" },
+      { name: "Jamie Reidy", stars: 4, fallRank: 13, school: "Harvard University", sport: "Rowing", gradYear: 2028, gpa: 3.93, personality: "Podium Sweep" },
+      { name: "Nicole Granovsky", stars: 4, fallRank: 17, school: "University of Michigan – Ann Arbor", sport: "Rowing", gradYear: 2028, gpa: 3.6, personality: "Hustler" }
+    ];
+
+    const searchInput = document.getElementById("searchInput");
+    const schoolFilter = document.getElementById("schoolFilter");
+    const sportFilter = document.getElementById("sportFilter");
+    const personalityFilter = document.getElementById("personalityFilter");
+    const sortSelect = document.getElementById("sortSelect");
+    const tableBody = document.getElementById("prospectTableBody");
+    const emptyState = document.getElementById("emptyState");
+
+    function populateFilters() {
+      const schools = new Set();
+      const sports = new Set();
+      const personalities = new Set();
+
+      prospects.forEach(p => {
+        schools.add(p.school);
+        sports.add(p.sport);
+        personalities.add(p.personality);
+      });
+
+      [...schools].forEach(s => schoolFilter.innerHTML += `<option>${s}</option>`);
+      [...sports].forEach(s => sportFilter.innerHTML += `<option>${s}</option>`);
+      [...personalities].forEach(s => personalityFilter.innerHTML += `<option>${s}</option>`);
+    }
+
+    function getFiltered() {
+      const s = searchInput.value.toLowerCase();
+      const school = schoolFilter.value;
+      const sport = sportFilter.value;
+      const personality = personalityFilter.value;
+      const sort = sortSelect.value;
+
+      let filtered = prospects.filter(p =>
+        (!s || p.name.toLowerCase().includes(s) || p.school.toLowerCase().includes(s)) &&
+        (!school || p.school === school) &&
+        (!sport || p.sport === sport) &&
+        (!personality || p.personality === personality)
+      );
+
+      filtered.sort((a, b) => {
+        if (sort === "rank-asc") return a.fallRank - b.fallRank;
+        if (sort === "gpa-desc") return b.gpa - a.gpa;
+        if (sort === "stars-desc") return b.stars - a.stars;
+        if (sort === "name-asc") return a.name.localeCompare(b.name);
+      });
+
+      return filtered;
+    }
+
+    function renderTable() {
+      const data = getFiltered();
+      tableBody.innerHTML = "";
+
+      if (data.length === 0) {
+        emptyState.style.display = "block";
+        return;
+      }
+      emptyState.style.display = "none";
+
+      data.forEach(p => {
+        tableBody.innerHTML += `
+          <tr>
+            <td class="cell-name">${p.name}</td>
+            <td>${p.school}</td>
+            <td>${p.sport}</td>
+            <td>${p.gradYear}</td>
+            <td>${p.fallRank}</td>
+            <td>${p.gpa.toFixed(2)}</td>
+            <td><span class="badge-stars">${"⭐️".repeat(p.stars)}</span></td>
+            <td><span class="badge-personality">${p.personality}</span></td>
+          </tr>
+        `;
+      });
+    }
+
+    [searchInput, schoolFilter, sportFilter, personalityFilter, sortSelect].forEach(el => el.addEventListener("input", renderTable));
+
+    populateFilters();
+    renderTable();
+  </script>
+
+</body>
+</html>
