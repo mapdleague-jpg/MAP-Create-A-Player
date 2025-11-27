@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MAP REI™ Comparison Module</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- MAP Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --map-blue: #2E5084;
+      --bg: #f3f4f8;
+      --card-bg: #ffffff;
+      --border: #dce2ee;
+      --text-main: #1a1a1a;
+      --text-muted: #6b7280;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 2rem;
+      background: var(--bg);
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-main);
+      text-align: center;
+    }
+
+    /* MAP BORDER WRAPPER */
+    .page-frame {
+      border: 10px solid var(--map-blue);
+      border-radius: 14px;
+      background: #ffffff;
+      padding: 2.5rem 1.5rem;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1.85rem;
+      color: var(--map-blue);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      max-width: 780px;
+      line-height: 1.45;
+      margin: 0 auto 2rem;
+    }
+
+    .table-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+      text-align: center;
+    }
+
+    th, td {
+      padding: 0.55rem;
+      border-bottom: 1px solid #edf2f7;
+      font-size: 0.8rem;
+    }
+
+    th {
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="page-frame">
+
+    <h1>MAP REI™ Comparison</h1>
+
+    <p class="subtitle">
+      The MAP Résumé Efficiency Index (REI™) converts academic rigor, leadership impact, 
+      professional exposure, technical skill, initiative, and MAP deliverable quality into 
+      a single 0–10 score, giving partners a front-office decision grade similar to WAR or QBR.
+    </p>
+
+    <section class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Kiley Wilhelm</th>
+            <th>Jamie Reidy</th>
+            <th>Nicole Granovsky</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr><td><strong>Academic Power</strong></td><td>⭐⭐⭐⭐⭐ (10/10)</td><td>⭐⭐⭐⭐⭐ (9.7/10)</td><td>⭐⭐⭐⭐ (7.8/10)</td></tr>
+          <tr><td><strong>Leadership Impact</strong></td><td>⭐⭐⭐⭐⭐ (9/10)</td><td>⭐⭐⭐⭐⭐+ (9.5/10)</td><td>⭐⭐⭐⭐½ (8.7/10)</td></tr>
+          <tr><td><strong>Professional Signals</strong></td><td>⭐⭐⭐⭐⭐ (8.5/10)</td><td>⭐⭐⭐⭐ (7.8/10)</td><td>⭐⭐⭐⭐⭐+ (9.2/10)</td></tr>
+          <tr><td><strong>Technical / Quant</strong></td><td>⭐⭐⭐⭐⭐ (9/10)</td><td>⭐⭐⭐⭐ (8/10)</td><td>⭐⭐⭐⭐½ (8.4/10)</td></tr>
+          <tr><td><strong>Initiative</strong></td><td>⭐⭐⭐⭐ (8/10)</td><td>⭐⭐⭐⭐ (7.8/10)</td><td>⭐⭐⭐⭐½ (8.6/10)</td></tr>
+          <tr><td><strong>MAP Deliverables</strong></td><td>⭐⭐⭐⭐⭐ (9.5/10)</td><td>⭐⭐⭐⭐⭐ (9/10)</td><td>⭐⭐⭐⭐½ (8.8/10)</td></tr>
+          <tr><td><strong>REI™ Score</strong></td><td><strong style="color: var(--map-blue);">9.05</strong></td><td><strong style="color: var(--map-blue);">8.76</strong></td><td><strong style="color: var(--map-blue);">8.54</strong></td></tr>
+          <tr><td><strong>Tier</strong></td><td>Tier 1</td><td>Tier 1</td><td>Tier 1.5</td></tr>
+          <tr><td><strong>Archetype</strong></td><td>Analyst Prototype</td><td>Leadership Engine</td><td>Operator</td></tr>
+        </tbody>
+
+      </table>
+    </section>
+
+  </div>
+
+</body>
+</html>
